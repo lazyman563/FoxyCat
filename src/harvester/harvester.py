@@ -1,25 +1,22 @@
 import os
 import subprocess
-import json
 import concurrent.futures
 
-# --- CONFIGURAÇÕES DO CLEITIN (DUMP TOTAL) ---
-VAULT_PATH = "vault/"
+# --- SETTINGS (GYAM ENGINE) ---
+# Saving directly to public/vault so the UI can find it
+VAULT_PATH = "public/vault/"
 SOURCES_FILE = "config/sources.txt"
-SETTINGS_FILE = "config/settings.yaml"
 
-# Garante que o porão (vault) existe
+# Ensure the vault exists
 os.makedirs(VAULT_PATH, exist_ok=True)
 
-def pilhagem_bruta(url):
+def raw_harvesting(url):
     """
-    O Cleitin entra no wrapper e extrai TUDO. 
-    Usa o yt-dlp como motor de extração universal.
+    Universal extraction engine using yt-dlp.
+    No limits, maximum quality, metadata extraction.
     """
-    print(f"🏴‍☠️ Cleitin iniciando extração profunda em: {url}")
-    
-    # Comando do Cleitin: Sem limites, qualidade máxima, extração de metadados
-    # --flat-playlist garante que ele pegue todos os IDs de um hub/feed sem travar
+    print(f"[*] Starting deep extraction: {url}")
+
     cmd = [
         "yt-dlp",
         "--extract-audio",
@@ -29,33 +26,30 @@ def pilhagem_bruta(url):
         "--ignore-errors",
         "--no-check-certificates",
         "--output", f"{VAULT_PATH}%(title)s.%(ext)s",
-        "--write-thumbnail",
         "--add-metadata",
         url
     ]
-    
+
     try:
         subprocess.run(cmd, check=True)
     except Exception as e:
-        print(f"⚠️ Cleitin encontrou uma trava em {url}, pulando pro próximo ID...")
+        print(f"[!] Extraction failed for {url}, skipping...")
 
-def iniciar_saque_industrial():
+def start_industrial_dump():
     if not os.path.exists(SOURCES_FILE):
-        print("❌ Cleitin avisou: Sem mapa de fontes (sources.txt)! Onde tá o dump?")
+        print("[!] Error: sources.txt not found!")
         return
 
     with open(SOURCES_FILE, "r") as f:
-        # Pega as linhas que não são comentários nem vazias
         urls = [line.strip() for line in f if line.strip() and not line.startswith("#")]
 
-    print(f"🦊 FoxyCat FM - Cleitin Engine: Iniciando Dump de {len(urls)} hubs...")
+    print(f"[*] FoxyCat FM Engine: Harvesting {len(urls)} hubs...")
 
-    # Força Bruta: Cleitin usa 10 braços (threads) pra baixar tudo de uma vez
+    # Force: 10 threads for parallel dumping
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        executor.map(pilhagem_bruta, urls)
+        executor.map(raw_harvesting, urls)
 
 if __name__ == "__main__":
-    # O Lema do Cleitin: Se funciona, não precisa de trava.
-    print("--- MODO CRAWLER ATIVADO (CLEITIN DUMP) ---")
-    iniciar_saque_industrial()
-    print("✅ Cleitin terminou o turno de pilhagem. O vault tá entupido!")
+    print("--- CRAWLER MODE ACTIVATED (GYAM DUMP) ---")
+    start_industrial_dump()
+    print("[+] Harvesting cycle complete. Vault is full.")

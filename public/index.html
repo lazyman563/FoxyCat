@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxyCat FM | Cleitin Engine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --spotify-green: #1DB954; --bg-black: #121212; --card-grey: #181818; --text-white: #ffffff; }
+        body { background-color: var(--bg-black); color: var(--text-white); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        .main-container { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; overflow-y: auto; }
+        .player-card { background: var(--card-grey); padding: 30px; border-radius: 12px; width: 100%; max-width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
+        .album-art { width: 250px; height: 250px; background: linear-gradient(45deg, #333, #111); margin: 0 auto 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 80px; color: var(--spotify-green); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        h1 { margin: 10px 0 5px; font-size: 24px; }
+        .status-badge { color: #b3b3b3; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        audio { width: 100%; margin: 20px 0; filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+        .github-btn { margin-top: 25px; display: inline-flex; align-items: center; background-color: var(--text-white); color: #000; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: transform 0.2s; }
+        .github-btn:hover { transform: scale(1.05); background-color: #f0f0f0; }
+        .github-btn i { margin-right: 10px; font-size: 20px; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="player-card">
+            <div class="album-art"><i class="fas fa-fox"></i></div>
+            <h1 id="track-title">FoxyCat FM</h1>
+            <div class="status-badge">Powered by Cleitin Engine v3.0</div>
+            
+            <audio id="audio-player" controls>
+                <source src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <a href="https://github.com/lazyman563/FoxyCat" target="_blank" class="github-btn">
+                <i class="fab fa-github"></i> VIEW REPOSITORY
+            </a>
+        </div>
+    </div>
+</body>
+</html>
