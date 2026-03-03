@@ -1,0 +1,16 @@
+# --- PONTOS DE ENTRADA PARA VARREDURA TOTAL (DUMP) ---
+# O Cleitin vai usar esses hubs para ramificar a busca por IDs sequenciais.
+
+# ENDPOINT DE VARREDURA (YouTube Music / InnerTube API Deep Scrape)
+https://music.youtube.com/youtubei/v1/search?query=*&filters=songs
+https://music.youtube.com/youtubei/v1/browse?browseId=FEmusic_new_releases
+
+# ENDPOINT DE INDEXAÇÃO (SoundCloud API v2 - Global Catalog Scraper)
+https://api-v2.soundcloud.com/tracks?client_id={CLIENT_ID}&limit=200&offset=0
+https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music
+
+# ENDPOINT DE ARQUIVO (Bandcamp / Audiomack Raw Discovery)
+https://bandcamp.com/api/discover/v1/get?g=all&s=top&p=0
+https://audiomack.com/api/v2/music/trending?limit=1000
+
+# O Cleitin vai iterar sobre os resultados e baixar cada arquivo de áudio disponível.

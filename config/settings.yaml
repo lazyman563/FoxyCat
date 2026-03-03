@@ -1,0 +1,15 @@
+# Cleitin Engine - Modo Varredura Total (Full Database Mirror)
+project_name: "FoxyCat FM"
+operation_mode: "SEQUENTIAL_ID_DUMP"
+schedule: "24/5" # Segunda a Sexta: Pilhagem | Sábado e Domingo: Manutenção
+
+# Parâmetros de Força Bruta (GYAM Mode - Give You A Mail)
+concurrent_crawlers: 100 # C++ Speed: 100 conexões simultâneas
+audio_quality: "0" # Bitrate máximo disponível (VBR 0)
+ignore_errors: true # Se um ID falhar, o Cleitin pula pro próximo sem parar
+max_storage_usage: "unlimited"
+recursive_depth: "infinite"
+
+# IPFS & Deployment (Fenestrae - Janelas de Acesso)
+ipfs_root_path: "/FoxyCat_Vault"
+surge_domain: "foxycat-fm.surge.sh"
